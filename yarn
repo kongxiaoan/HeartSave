@@ -1,0 +1,13 @@
+#!/bin/bash
+# Project-local Yarn wrapper
+# This ensures Gradle uses Yarn 1.x instead of system Yarn 4.x
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+YARN_CLASSIC="$SCRIPT_DIR/node_modules/.bin/yarn"
+
+if [ -f "$YARN_CLASSIC" ]; then
+    exec "$YARN_CLASSIC" "$@"
+else
+    echo "Error: Yarn Classic not found at $YARN_CLASSIC" >&2
+    exit 1
+fi
