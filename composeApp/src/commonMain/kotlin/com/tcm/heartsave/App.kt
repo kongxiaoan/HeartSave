@@ -33,9 +33,18 @@ fun App() {
         ) {
             Button(onClick = { showContent = !showContent }) {
                 Text("Click me!")
+                // test network
+                
             }
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
+                var greeting by remember { mutableStateOf("Loading") }
+                LaunchedEffect(true) {
+                    greeting = try {
+                        Greeting().greet()
+                    }catch (e: Exception) {
+                        "Error: ${e.message}"
+                    }
+                }
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,

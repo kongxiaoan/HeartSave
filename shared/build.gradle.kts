@@ -37,12 +37,17 @@ kotlin {
             
             // Kotlinx Serialization
             implementation(libs.kotlinx.serialization.json)
+            
+            // Kotlinx Coroutines
+            implementation(libs.kotlinx.coroutines.core)
         }
         androidMain.dependencies {
+            implementation(libs.ktor.client.okhttp)
             implementation(libs.ktor.client.android)
+            implementation(libs.kotlinx.coroutines.android)
         }
         iosMain.dependencies {
-            implementation(libs.ktor.client.ios)
+            implementation(libs.ktor.client.darwin)
         }
         jvmMain.dependencies {
             implementation(libs.ktor.client.cio)
@@ -55,6 +60,9 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.ktor.client.mock)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
